@@ -1,0 +1,22 @@
+﻿<Window x:Class="_3D_Transformation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:h="http://helix-toolkit.org/wpf"
+        xmlns:local="clr-namespace:_3D_Transformation"
+        mc:Ignorable="d"
+        Title="3D Transformation" Height="450" Width="800">
+
+    <Grid Width="800" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <h:HelixViewport3D >
+            <h:DefaultLights/>
+            <h:Teapot Position="2 2 2"/>
+            <h:GridLinesVisual3D Width="128" Length="128" MinorDistance="1" MajorDistance="1" Thickness="0.01"/>
+            <h:CoordinateSystemVisual3D />
+            <h:BillboardTextVisual3D Position="1.2 0 0" Text="X" />
+            <h:BillboardTextVisual3D Position="0 1.2 0" Text="Y" />
+            <h:BillboardTextVisual3D Position="0 0 1.2" Text="Z" />
+        </h:HelixViewport3D>
+    </Grid>
+</Window>
