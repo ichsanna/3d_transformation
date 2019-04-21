@@ -14,13 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Media3D;
 
+
 namespace _3D_Transformation
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         bool objekterbuat =false;
         Model3DGroup objects = new Model3DGroup();
         double[,] matrikstransformasi = new double[,]
@@ -45,6 +48,7 @@ namespace _3D_Transformation
             InitializeComponent();
             initviewport();
             initcombobox();
+            buttontranslate.Content = Math.Round(Convert.ToDouble(Math.Cos(Math.PI * 22 / 180)), 4).ToString();
         }
         private void gambarsumbux()
         {
@@ -373,29 +377,29 @@ namespace _3D_Transformation
             if (axis == 'x')
             {
                 matrikstransformasi[0, 0] = 1;
-                matrikstransformasi[1, 1] = Math.Round(Math.Cos(Math.PI * angle/180),2);
-                matrikstransformasi[2, 2] = Math.Round(Math.Cos(Math.PI * angle / 180), 2);
+                matrikstransformasi[1, 1] = Math.Cos(Math.PI * angle/180);
+                matrikstransformasi[2, 2] = Math.Cos(Math.PI * angle / 180);
                 matrikstransformasi[3, 3] = 1;
-                matrikstransformasi[1, 2] = Math.Round(Math.Sin(Math.PI * angle / 180) * -1, 2);
-                matrikstransformasi[2, 1] = Math.Round(Math.Sin(Math.PI * angle / 180), 2);
+                matrikstransformasi[1, 2] = Math.Sin(Math.PI * angle / 180) * -1;
+                matrikstransformasi[2, 1] = Math.Sin(Math.PI * angle / 180);
             }
             else if (axis == 'y')
             {
-                matrikstransformasi[0, 0] = Math.Round(Math.Cos(Math.PI * angle / 180), 2);
+                matrikstransformasi[0, 0] = Math.Cos(Math.PI * angle / 180);
                 matrikstransformasi[1, 1] = 1;
-                matrikstransformasi[2, 2] = Math.Round(Math.Cos(Math.PI * angle / 180), 2);
+                matrikstransformasi[2, 2] = Math.Cos(Math.PI * angle / 180);
                 matrikstransformasi[3, 3] = 1;
-                matrikstransformasi[0, 2] = Math.Round(Math.Sin(Math.PI * angle / 180), 2);
-                matrikstransformasi[2, 0] = Math.Round(Math.Sin(Math.PI * angle / 180) *-1, 2);
+                matrikstransformasi[0, 2] = Math.Sin(Math.PI * angle / 180);
+                matrikstransformasi[2, 0] = Math.Sin(Math.PI * angle / 180) *-1;
             }
             else if (axis == 'z')
             {
-                matrikstransformasi[0, 0] = Math.Round(Math.Cos(Math.PI * angle / 180), 2);
-                matrikstransformasi[1, 1] = Math.Round(Math.Cos(Math.PI * angle / 180), 2);
+                matrikstransformasi[0, 0] = Math.Cos(Math.PI * angle / 180);
+                matrikstransformasi[1, 1] = Math.Cos(Math.PI * angle / 180);
                 matrikstransformasi[2, 2] = 1;
                 matrikstransformasi[3, 3] = 1;
-                matrikstransformasi[0, 1] = Math.Round(Math.Sin(Math.PI * angle / 180) *-1, 2);
-                matrikstransformasi[1, 0] = Math.Round(Math.Sin(Math.PI * angle / 180), 2);
+                matrikstransformasi[0, 1] = Math.Sin(Math.PI * angle / 180) *-1;
+                matrikstransformasi[1, 0] = Math.Sin(Math.PI * angle / 180);
             }
             perkalianmatriks();
         }
@@ -417,9 +421,9 @@ namespace _3D_Transformation
                     tempy += (matrikstransformasi[1, i] * matriks2[i, 0]);
                     tempz += (matrikstransformasi[2, i] * matriks2[i, 0]);
                 }
-                titik[h].X = tempx;
-                titik[h].Y = tempy;
-                titik[h].Z = tempz;
+                titik[h].X = Math.Round(tempx,4);
+                titik[h].Y = Math.Round(tempy,4);
+                titik[h].Z = Math.Round(tempz,4);
             }
             resetviewport();
             resetmatrikstransform();
