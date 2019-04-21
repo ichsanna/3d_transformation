@@ -15,28 +15,9 @@
                     <Viewport3D Name="viewport" ClipToBounds="True" Width="600" Height="230" Canvas.Left="0">
                         <!-- Defines the camera used to view the 3D object. -->
                         <Viewport3D.Camera>
-                            <PerspectiveCamera x:Name="camera" Position="7,6,4" LookDirection="-7,-6,-4" FieldOfView="60" />
+                            <PerspectiveCamera x:Name="camera" Position="4,8,16" LookDirection="-4,-8,-16" FieldOfView="60" />
                         </Viewport3D.Camera>
                         <!-- The ModelVisual3D children contain the 3D models -->
-                        <Viewport3D.Children>
-                            <!-- This ModelVisual3D defines the light cast in the scene. Without light, the3D object cannot be seen. -->
-                            <ModelVisual3D x:Name="lighting">
-                                <ModelVisual3D.Content>
-                                    <DirectionalLight Color="#FFFFFF" Direction="-2,-2,-2" />
-                                </ModelVisual3D.Content>
-                            </ModelVisual3D>
-                            <ModelVisual3D>
-                                <ModelVisual3D.Content>
-                                    <DirectionalLight Color="#FFFFFF" Direction="2,2,2" />
-                                </ModelVisual3D.Content>
-                            </ModelVisual3D>
-                            <ModelVisual3D x:Name="model">
-                                <ModelVisual3D.Content>
-                                    <GeometryModel3D>
-                                    </GeometryModel3D>
-                                </ModelVisual3D.Content>
-                            </ModelVisual3D>
-                        </Viewport3D.Children>
                         <!--Trigger the TranslateTransform3D animation when the 3D object loads.-->
                         <!--<Viewport3D.Triggers>
                             <EventTrigger RoutedEvent="Viewport3D.Loaded">
@@ -65,32 +46,98 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TabControl VerticalAlignment="Top" Background="#FFACACAC" Height="183" Margin="0,0,-383,0">
-                <TabItem Header="Add Object">
+                <TabItem Header="Kubus">
                     <Grid Background="White" Margin="0,0,-0.2,0.4">
-                        <TextBox x:Name="textboxposisiawalx"  HorizontalAlignment="Left" Height="22" Margin="112,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30"/>
-                        <Label Content="Posisi:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="textboxposisiawaly" HorizontalAlignment="Left" Height="22" Margin="172,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30"/>
-                        <TextBox x:Name="textboxposisiawalz" HorizontalAlignment="Left" Height="22" Margin="232,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30"/>
-                        <Label Content="X:" HorizontalAlignment="Left" Margin="88,12,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Y:" HorizontalAlignment="Left" Margin="148,12,0,0" VerticalAlignment="Top"/>
-                        <Label Content="Z:" HorizontalAlignment="Left" Margin="208,12,0,0" VerticalAlignment="Top"/>
-                        <Button x:Name="buttonbuatobjek" Content="Buat Objek" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="75"/>
-                        <Button x:Name="buttonresetobjek" Content="Reset" HorizontalAlignment="Left" Margin="105,122,0,0" VerticalAlignment="Top" Width="75"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82*"/>
+                            <ColumnDefinition Width="495*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="textboxposisiawalx"  HorizontalAlignment="Left" Height="22" Margin="30.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="Posisi Pusat:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="textboxposisiawaly" HorizontalAlignment="Left" Height="22" Margin="90.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <TextBox x:Name="textboxposisiawalz" HorizontalAlignment="Left" Height="22" Margin="150.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="X:" HorizontalAlignment="Left" Margin="6.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Y:" HorizontalAlignment="Left" Margin="66.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Z:" HorizontalAlignment="Left" Margin="126.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Button x:Name="buttonbuatobjek" Content="Buat Kubus" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="75" Click="buttonbuatobjek_Click" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="textboxpanjangsisi"  HorizontalAlignment="Left" Height="22" Margin="30.4,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="Panjang Sisi:" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Translate">
-                    <Grid Background="White"/>
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82*"/>
+                            <ColumnDefinition Width="495*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="textboxtranslatex"  HorizontalAlignment="Left" Height="22" Margin="30.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="Translate:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="textboxtranslatey" HorizontalAlignment="Left" Height="22" Margin="90.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <TextBox x:Name="textboxtranslatez" HorizontalAlignment="Left" Height="22" Margin="150.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="X:" HorizontalAlignment="Left" Margin="6.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Y:" HorizontalAlignment="Left" Margin="66.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Z:" HorizontalAlignment="Left" Margin="126.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Button x:Name="buttontranslasi" Content="Translate" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="75" Click="buttontranslate_Click" Grid.ColumnSpan="2"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Scale">
-                    <Grid Background="White"/>
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82*"/>
+                            <ColumnDefinition Width="495*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="textboxscalex"  HorizontalAlignment="Left" Height="22" Margin="30.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="Scale:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="textboxscaley" HorizontalAlignment="Left" Height="22" Margin="90.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <TextBox x:Name="textboxscalez" HorizontalAlignment="Left" Height="22" Margin="150.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="X:" HorizontalAlignment="Left" Margin="6.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Y:" HorizontalAlignment="Left" Margin="66.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Z:" HorizontalAlignment="Left" Margin="126.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Button x:Name="buttonscale" Content="Scale" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="75" Click="buttonscale_Click" Grid.ColumnSpan="2"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Rotate">
-                    <Grid Background="White"/>
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="82*"/>
+                            <ColumnDefinition Width="495*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Rotate:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                        <Button x:Name="buttonrotate" Content="Rotate" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="75" Click="buttonrotate_Click" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="comboboxrotate" Grid.Column="1" HorizontalAlignment="Left" Margin="0.4,15,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboboxrotate_SChanged"/>
+                        <TextBox x:Name="textboxrotatepointxa"  HorizontalAlignment="Left" Height="22" Margin="30.4,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1" IsEnabled="False"/>
+                        <Label Content="Point A:" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="textboxrotatepointya" HorizontalAlignment="Left" Height="22" Margin="90.4,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1" IsEnabled="False"/>
+                        <TextBox x:Name="textboxrotatepointza" HorizontalAlignment="Left" Height="22" Margin="150.4,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1" IsEnabled="False"/>
+                        <Label Content="X:" HorizontalAlignment="Left" Margin="6.4,50,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Y:" HorizontalAlignment="Left" Margin="66.4,50,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Z:" HorizontalAlignment="Left" Margin="126.4,50,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <TextBox x:Name="textboxrotatepointxb"  HorizontalAlignment="Left" Height="22" Margin="30.4,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1" IsEnabled="False"/>
+                        <Label Content="Point B:" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="textboxrotatepointyb" HorizontalAlignment="Left" Height="22" Margin="90.4,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1" IsEnabled="False"/>
+                        <TextBox x:Name="textboxrotatepointzb" HorizontalAlignment="Left" Height="22" Margin="150.4,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1" IsEnabled="False"/>
+                        <Label Content="X:" HorizontalAlignment="Left" Margin="6.4,81,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Y:" HorizontalAlignment="Left" Margin="66.4,81,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <Label Content="Z:" HorizontalAlignment="Left" Margin="126.4,81,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                        <TextBox x:Name="textboxrotateangle" HorizontalAlignment="Left" Height="22" Margin="168.4,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Grid.Column="1"/>
+                        <Label Content="Angle:" HorizontalAlignment="Left" Margin="125.4,12,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Shear">
                     <Grid Background="White"/>
                 </TabItem>
             </TabControl>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="160" Margin="590,523,0,0" VerticalAlignment="Top" Width="469">
+            <Label Content="Posisi titik kubus" Margin="185,10,186,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik1" Content="1:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik2" Content="2:" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik3" Content="3:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik4" Content="4:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik5" Content="5:" HorizontalAlignment="Left" Margin="226,41,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik6" Content="6:" HorizontalAlignment="Left" Margin="226,67,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik7" Content="7:" HorizontalAlignment="Left" Margin="226,93,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="labeltitik8" Content="8:" HorizontalAlignment="Left" Margin="226,119,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>
