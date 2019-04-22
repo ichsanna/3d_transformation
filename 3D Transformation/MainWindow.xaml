@@ -13,7 +13,7 @@
                 <Canvas Width="600" Height="230">
                     <Viewport3D Name="viewport" ClipToBounds="True" Width="600" Height="230" Canvas.Left="0">
                         <Viewport3D.Camera>
-                            <PerspectiveCamera x:Name="camera" Position="4,8,16" LookDirection="-4,-8,-16" FieldOfView="60" />
+                            <PerspectiveCamera x:Name="camera" Position="6,12,24" LookDirection="-6,-12,-24" FieldOfView="60" />
                         </Viewport3D.Camera>
                     </Viewport3D>
                 </Canvas>

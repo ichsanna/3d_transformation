@@ -17,7 +17,9 @@ using System.Windows.Media.Media3D;
 
 namespace _3D_Transformation
 {
-
+    // Kelompok:
+    // Dian Rahmaji (17/413896/TK/46336)
+    // Raden Ichsan Nur Aldiansyah (17/413915/TK/46355)
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -476,7 +478,34 @@ namespace _3D_Transformation
             viewport.Children.Clear();
             initviewport();
         }
-
+        private void buttonbuatobjek_Click(object sender, RoutedEventArgs e)
+        {
+            if (!objekterbuat)
+            {
+                objekterbuat = true;
+                buttonbuatobjek.Content = "Reset";
+                var panjang = Convert.ToDouble(textboxpanjangsisi.Text);
+                var panjang2 = panjang / 2;
+                var x = Convert.ToDouble(textboxposisiawalx.Text);
+                var y = Convert.ToDouble(textboxposisiawaly.Text);
+                var z = Convert.ToDouble(textboxposisiawalz.Text);
+                titik[0] = new Point3D(x - panjang2, y - panjang2, z - panjang2);
+                titik[1] = new Point3D(x + panjang2, y - panjang2, z - panjang2);
+                titik[2] = new Point3D(x - panjang2, y + panjang2, z - panjang2);
+                titik[3] = new Point3D(x + panjang2, y + panjang2, z - panjang2);
+                titik[4] = new Point3D(x - panjang2, y - panjang2, z + panjang2);
+                titik[5] = new Point3D(x + panjang2, y - panjang2, z + panjang2);
+                titik[6] = new Point3D(x - panjang2, y + panjang2, z + panjang2);
+                titik[7] = new Point3D(x + panjang2, y + panjang2, z + panjang2);
+                gambarkubus();
+            }
+            else
+            {
+                resetviewport();
+                objekterbuat = false;
+                buttonbuatobjek.Content = "Buat Kubus";
+            }
+        }
         private void buttontranslate_Click(object sender, RoutedEventArgs e)
         {
             double x, y, z;
