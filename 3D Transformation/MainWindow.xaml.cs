@@ -48,7 +48,6 @@ namespace _3D_Transformation
             InitializeComponent();
             initviewport();
             initcombobox();
-            buttontranslate.Content = Math.Round(Convert.ToDouble(Math.Cos(Math.PI * 22 / 180)), 4).ToString();
         }
         private void gambarsumbux()
         {
@@ -81,7 +80,7 @@ namespace _3D_Transformation
             meshx.TriangleIndices.Add(5);
             meshx.TriangleIndices.Add(6);
             meshx.TriangleIndices.Add(2);
-            meshx.TriangleIndices.Add(0);
+            meshx.TriangleIndices.Add(4);
             meshx.TriangleIndices.Add(2);
             meshx.TriangleIndices.Add(0);
             meshx.TriangleIndices.Add(4);
@@ -137,7 +136,7 @@ namespace _3D_Transformation
             meshy.TriangleIndices.Add(5);
             meshy.TriangleIndices.Add(6);
             meshy.TriangleIndices.Add(2);
-            meshy.TriangleIndices.Add(0);
+            meshy.TriangleIndices.Add(4);
             meshy.TriangleIndices.Add(2);
             meshy.TriangleIndices.Add(0);
             meshy.TriangleIndices.Add(4);
@@ -193,7 +192,7 @@ namespace _3D_Transformation
             meshz.TriangleIndices.Add(5);
             meshz.TriangleIndices.Add(6);
             meshz.TriangleIndices.Add(2);
-            meshz.TriangleIndices.Add(0);
+            meshz.TriangleIndices.Add(4);
             meshz.TriangleIndices.Add(2);
             meshz.TriangleIndices.Add(0);
             meshz.TriangleIndices.Add(4);
@@ -241,8 +240,8 @@ namespace _3D_Transformation
             DirectionalLight light2 = new DirectionalLight();
             light.Color = Colors.White;
             light2.Color = Colors.White;
-            light.Direction = new Vector3D(-2, -2, -2);
-            light2.Direction = new Vector3D(2, 2, 2);
+            light.Direction = new Vector3D(-5, -5, -5);
+            light2.Direction = new Vector3D(5, 5, 5);
             lighting.Content = light;
             lighting2.Content = light2;
             viewport.Children.Add(lighting);
@@ -403,6 +402,77 @@ namespace _3D_Transformation
             }
             perkalianmatriks();
         }
+        private void rotate2(double angle,double x1, double y1, double z1, double x2, double y2, double z2)
+        {
+            resetmatrikstransform();
+            matrikstransformasi[0, 0] = 1;
+            matrikstransformasi[1, 1] = 1;
+            matrikstransformasi[2, 2] = 1;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[0, 3] = x1*-1;
+            matrikstransformasi[1, 3] = y1*-1;
+            matrikstransformasi[2, 3] = z1*-1;
+            perkalianmatriks();
+            var a = x2 - x1;
+            var b = y2 - y1;
+            var c = z2 - z1;
+            var panjanggaris = Math.Sqrt(Math.Pow(b, 2)+Math.Pow(c,2));
+            var panjanggaris2 = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2) + Math.Pow(c, 2));
+            var sin = b / panjanggaris;
+            var cos = c / panjanggaris;
+            matrikstransformasi[0, 0] = 1;
+            matrikstransformasi[1, 1] = cos;
+            matrikstransformasi[2, 2] = cos;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[1, 2] = sin * -1;
+            matrikstransformasi[2, 1] = sin;
+            perkalianmatriks();
+            matrikstransformasi[0, 0] = panjanggaris/panjanggaris2;
+            matrikstransformasi[1, 1] = 1;
+            matrikstransformasi[2, 2] = panjanggaris/panjanggaris2;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[0, 2] = (a/panjanggaris2)*-1;
+            matrikstransformasi[2, 0] = a / panjanggaris2;
+            perkalianmatriks();
+            rotate(angle, 'z');
+            matrikstransformasi[0, 0] = panjanggaris / panjanggaris2;
+            matrikstransformasi[1, 1] = 1;
+            matrikstransformasi[2, 2] = panjanggaris / panjanggaris2;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[0, 2] = a / panjanggaris2;
+            matrikstransformasi[2, 0] = (a / panjanggaris2) * -1;
+            perkalianmatriks();
+            matrikstransformasi[0, 0] = 1;
+            matrikstransformasi[1, 1] = cos;
+            matrikstransformasi[2, 2] = cos;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[1, 2] = sin;
+            matrikstransformasi[2, 1] = sin * -1;
+            perkalianmatriks();
+            matrikstransformasi[0, 0] = 1;
+            matrikstransformasi[1, 1] = 1;
+            matrikstransformasi[2, 2] = 1;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[0, 3] = x1;
+            matrikstransformasi[1, 3] = y1;
+            matrikstransformasi[2, 3] = z1;
+            perkalianmatriks();
+        }
+        private void shear(double xy,double xz, double yx, double yz, double zx, double zy)
+        {
+            resetmatrikstransform();
+            matrikstransformasi[0, 0] = 1;
+            matrikstransformasi[1, 1] = 1;
+            matrikstransformasi[2, 2] = 1;
+            matrikstransformasi[3, 3] = 1;
+            matrikstransformasi[0, 1] = yx;
+            matrikstransformasi[0, 2] = zx;
+            matrikstransformasi[1, 0] = xy;
+            matrikstransformasi[1, 2] = zy;
+            matrikstransformasi[2, 0] = xz;
+            matrikstransformasi[2, 1] = yz;
+            perkalianmatriks();
+        }
         private void perkalianmatriks()
         {
             double tempx,tempy,tempz;
@@ -487,6 +557,10 @@ namespace _3D_Transformation
 
         private void buttonrotate_Click(object sender, RoutedEventArgs e)
         {
+            if (textboxrotateangle.Text == "")
+            {
+                textboxrotateangle.Text = "0";
+            }
             if (comboboxrotate.SelectedIndex == 0)
             {
                 rotate(Convert.ToDouble(textboxrotateangle.Text), 'x');
@@ -499,6 +573,105 @@ namespace _3D_Transformation
             {
                 rotate(Convert.ToDouble(textboxrotateangle.Text), 'z');
             }
+            else if (comboboxrotate.SelectedIndex == 3)
+            {
+                var x1 = Convert.ToDouble(textboxrotatepointxa.Text);
+                var y1 = Convert.ToDouble(textboxrotatepointya.Text);
+                var z1 = Convert.ToDouble(textboxrotatepointza.Text);
+                var x2 = Convert.ToDouble(textboxrotatepointxb.Text);
+                var y2 = Convert.ToDouble(textboxrotatepointyb.Text);
+                var z2 = Convert.ToDouble(textboxrotatepointzb.Text);
+                //var meshc = new MeshGeometry3D();
+                //var l0 = new Point3D(x2, y2-0.05, z2-0.05);
+                //var l1 =new Point3D(x1, y1-0.05, z1-0.05);
+                //var l2 =new Point3D(x2, y2+0.05, z2-0.05);
+                //var l3 =new Point3D(x1, y1+0.05, z1-0.05);
+                //var l4 =new Point3D(x2, y2-0.05, z2+0.05);
+                //var l5 =new Point3D(x1, y1-0.05, z1+0.05);
+                //var l6 =new Point3D(x2, y2+0.05, z2+0.05);
+                //var l7 =new Point3D(x1, y1+0.05, z1+0.05);
+                //meshc.Positions.Add(l0);
+                //meshc.Positions.Add(l1);
+                //meshc.Positions.Add(l2);
+                //meshc.Positions.Add(l3);
+                //meshc.Positions.Add(l4);
+                //meshc.Positions.Add(l5);
+                //meshc.Positions.Add(l6);
+                //meshc.Positions.Add(l7);
+                //meshc.TriangleIndices.Add(2);
+                //meshc.TriangleIndices.Add(3);
+                //meshc.TriangleIndices.Add(1);
+                //meshc.TriangleIndices.Add(2);
+                //meshc.TriangleIndices.Add(1);
+                //meshc.TriangleIndices.Add(0);
+                //meshc.TriangleIndices.Add(7);
+                //meshc.TriangleIndices.Add(1);
+                //meshc.TriangleIndices.Add(3);
+                //meshc.TriangleIndices.Add(7);
+                //meshc.TriangleIndices.Add(5);
+                //meshc.TriangleIndices.Add(1);
+                //meshc.TriangleIndices.Add(6);
+                //meshc.TriangleIndices.Add(5);
+                //meshc.TriangleIndices.Add(7);
+                //meshc.TriangleIndices.Add(6);
+                //meshc.TriangleIndices.Add(4);
+                //meshc.TriangleIndices.Add(5);
+                //meshc.TriangleIndices.Add(6);
+                //meshc.TriangleIndices.Add(2);
+                //meshc.TriangleIndices.Add(0);
+                //meshc.TriangleIndices.Add(2);
+                //meshc.TriangleIndices.Add(0);
+                //meshc.TriangleIndices.Add(4);
+                //meshc.TriangleIndices.Add(2);
+                //meshc.TriangleIndices.Add(7);
+                //meshc.TriangleIndices.Add(3);
+                //meshc.TriangleIndices.Add(2);
+                //meshc.TriangleIndices.Add(6);
+                //meshc.TriangleIndices.Add(7);
+                //meshc.TriangleIndices.Add(0);
+                //meshc.TriangleIndices.Add(1);
+                //meshc.TriangleIndices.Add(5);
+                //meshc.TriangleIndices.Add(0);
+                //meshc.TriangleIndices.Add(5);
+                //meshc.TriangleIndices.Add(4);
+                //SolidColorBrush brushc = new SolidColorBrush(Colors.Blue);
+                //var materialc = new DiffuseMaterial(brushc);
+                //var modelgroupc = new Model3DGroup();
+                //modelgroupc.Children.Add(new GeometryModel3D(meshc, materialc));
+                //var modelvisualc = new ModelVisual3D();
+                //modelvisualc.Content = modelgroupc;
+                //viewport.Children.Add(modelvisualc);
+                rotate2(Convert.ToDouble(textboxrotateangle.Text),x1, y1,z1,x2,y2,z2);
+            }
+        }
+
+        private void buttonshear_Click(object sender, RoutedEventArgs e)
+        {
+            if (textboxshearxy.Text == "")
+            {
+                textboxshearxy.Text = "0";
+            }
+            if (textboxshearxz.Text == "")
+            {
+                textboxshearxz.Text = "0";
+            }
+            if (textboxshearyx.Text == "")
+            {
+                textboxshearyx.Text = "0";
+            }
+            if (textboxshearyz.Text == "")
+            {
+                textboxshearyz.Text = "0";
+            }
+            if (textboxshearzx.Text == "")
+            {
+                textboxshearzx.Text = "0";
+            }
+            if (textboxshearzy.Text == "")
+            {
+                textboxshearzy.Text = "0";
+            }
+            shear(Convert.ToDouble(textboxshearxy.Text), Convert.ToDouble(textboxshearxz.Text), Convert.ToDouble(textboxshearyx.Text), Convert.ToDouble(textboxshearyz.Text), Convert.ToDouble(textboxshearzx.Text), Convert.ToDouble(textboxshearzy.Text));
         }
     }
 }
