@@ -100,7 +100,6 @@ namespace _3D_Transformation
             var materialx = new DiffuseMaterial(brushx);
             var modelgroupx = new Model3DGroup();
             modelgroupx.Children.Add(new GeometryModel3D(meshx, materialx));
-            //modelgroupx.Children.Add(new AmbientLight(Colors.Red));
             var modelvisualx = new ModelVisual3D();
             modelvisualx.Content = modelgroupx;
             viewport.Children.Add(modelvisualx);
@@ -156,7 +155,6 @@ namespace _3D_Transformation
             var materialy = new DiffuseMaterial(brushy);
             var modelgroupy = new Model3DGroup();
             modelgroupy.Children.Add(new GeometryModel3D(meshy, materialy));
-            //modelgroupx.Children.Add(new AmbientLight(Colors.Red));
             var modelvisualy = new ModelVisual3D();
             modelvisualy.Content = modelgroupy;
             viewport.Children.Add(modelvisualy);
@@ -212,7 +210,6 @@ namespace _3D_Transformation
             var materialz = new DiffuseMaterial(brushz);
             var modelgroupz = new Model3DGroup();
             modelgroupz.Children.Add(new GeometryModel3D(meshz, materialz));
-            //modelgroupx.Children.Add(new AmbientLight(Colors.Red));
             var modelvisualz = new ModelVisual3D();
             modelvisualz.Content = modelgroupz;
             viewport.Children.Add(modelvisualz);
@@ -309,45 +306,10 @@ namespace _3D_Transformation
             var material = new DiffuseMaterial(brush);
             var modelgroup = new Model3DGroup();
             modelgroup.Children.Add(new GeometryModel3D(mesh, material));
-            //modelgroup.Children.Add(new AmbientLight(Colors.Red));
             var modelvisual = new ModelVisual3D();
             modelvisual.Content = modelgroup;
             viewport.Children.Add(modelvisual);
             updateposisi();
-        }
-
-        private void buttonbuatobjek_Click(object sender, RoutedEventArgs e)
-        {
-            if (!objekterbuat)
-            {
-                objekterbuat = true;
-                buttonbuatobjek.Content = "Reset";
-                var panjang = Convert.ToDouble(textboxpanjangsisi.Text);
-                var panjang2 = panjang / 2;
-                var x = Convert.ToDouble(textboxposisiawalx.Text);
-                var y = Convert.ToDouble(textboxposisiawaly.Text);
-                var z = Convert.ToDouble(textboxposisiawalz.Text);
-                titik[0] = new Point3D(x - panjang2, y - panjang2, z - panjang2);
-                titik[1] = new Point3D(x + panjang2, y - panjang2, z - panjang2);
-                titik[2] = new Point3D(x - panjang2, y + panjang2, z - panjang2);
-                titik[3] = new Point3D(x + panjang2, y + panjang2, z - panjang2);
-                titik[4] = new Point3D(x - panjang2, y - panjang2, z + panjang2);
-                titik[5] = new Point3D(x + panjang2, y - panjang2, z + panjang2);
-                titik[6] = new Point3D(x - panjang2, y + panjang2, z + panjang2);
-                titik[7] = new Point3D(x + panjang2, y + panjang2, z + panjang2);
-                gambarkubus();
-            }
-            else
-            {
-                resetviewport();
-                objekterbuat = false;
-                buttonbuatobjek.Content = "Buat Kubus";
-            }
-        }
-        private void resetviewport()
-        {
-            viewport.Children.Clear();
-            initviewport();
         }
         private void translate(double x, double y, double z)
         {
@@ -509,6 +471,12 @@ namespace _3D_Transformation
                 }
             }
         }
+        private void resetviewport()
+        {
+            viewport.Children.Clear();
+            initviewport();
+        }
+
         private void buttontranslate_Click(object sender, RoutedEventArgs e)
         {
             double x, y, z;
@@ -581,66 +549,6 @@ namespace _3D_Transformation
                 var x2 = Convert.ToDouble(textboxrotatepointxb.Text);
                 var y2 = Convert.ToDouble(textboxrotatepointyb.Text);
                 var z2 = Convert.ToDouble(textboxrotatepointzb.Text);
-                //var meshc = new MeshGeometry3D();
-                //var l0 = new Point3D(x2, y2-0.05, z2-0.05);
-                //var l1 =new Point3D(x1, y1-0.05, z1-0.05);
-                //var l2 =new Point3D(x2, y2+0.05, z2-0.05);
-                //var l3 =new Point3D(x1, y1+0.05, z1-0.05);
-                //var l4 =new Point3D(x2, y2-0.05, z2+0.05);
-                //var l5 =new Point3D(x1, y1-0.05, z1+0.05);
-                //var l6 =new Point3D(x2, y2+0.05, z2+0.05);
-                //var l7 =new Point3D(x1, y1+0.05, z1+0.05);
-                //meshc.Positions.Add(l0);
-                //meshc.Positions.Add(l1);
-                //meshc.Positions.Add(l2);
-                //meshc.Positions.Add(l3);
-                //meshc.Positions.Add(l4);
-                //meshc.Positions.Add(l5);
-                //meshc.Positions.Add(l6);
-                //meshc.Positions.Add(l7);
-                //meshc.TriangleIndices.Add(2);
-                //meshc.TriangleIndices.Add(3);
-                //meshc.TriangleIndices.Add(1);
-                //meshc.TriangleIndices.Add(2);
-                //meshc.TriangleIndices.Add(1);
-                //meshc.TriangleIndices.Add(0);
-                //meshc.TriangleIndices.Add(7);
-                //meshc.TriangleIndices.Add(1);
-                //meshc.TriangleIndices.Add(3);
-                //meshc.TriangleIndices.Add(7);
-                //meshc.TriangleIndices.Add(5);
-                //meshc.TriangleIndices.Add(1);
-                //meshc.TriangleIndices.Add(6);
-                //meshc.TriangleIndices.Add(5);
-                //meshc.TriangleIndices.Add(7);
-                //meshc.TriangleIndices.Add(6);
-                //meshc.TriangleIndices.Add(4);
-                //meshc.TriangleIndices.Add(5);
-                //meshc.TriangleIndices.Add(6);
-                //meshc.TriangleIndices.Add(2);
-                //meshc.TriangleIndices.Add(0);
-                //meshc.TriangleIndices.Add(2);
-                //meshc.TriangleIndices.Add(0);
-                //meshc.TriangleIndices.Add(4);
-                //meshc.TriangleIndices.Add(2);
-                //meshc.TriangleIndices.Add(7);
-                //meshc.TriangleIndices.Add(3);
-                //meshc.TriangleIndices.Add(2);
-                //meshc.TriangleIndices.Add(6);
-                //meshc.TriangleIndices.Add(7);
-                //meshc.TriangleIndices.Add(0);
-                //meshc.TriangleIndices.Add(1);
-                //meshc.TriangleIndices.Add(5);
-                //meshc.TriangleIndices.Add(0);
-                //meshc.TriangleIndices.Add(5);
-                //meshc.TriangleIndices.Add(4);
-                //SolidColorBrush brushc = new SolidColorBrush(Colors.Blue);
-                //var materialc = new DiffuseMaterial(brushc);
-                //var modelgroupc = new Model3DGroup();
-                //modelgroupc.Children.Add(new GeometryModel3D(meshc, materialc));
-                //var modelvisualc = new ModelVisual3D();
-                //modelvisualc.Content = modelgroupc;
-                //viewport.Children.Add(modelvisualc);
                 rotate2(Convert.ToDouble(textboxrotateangle.Text),x1, y1,z1,x2,y2,z2);
             }
         }
